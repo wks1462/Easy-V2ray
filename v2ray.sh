@@ -1,6 +1,7 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Disable China
+yum -y install wget vim lrzsz
 wget http://iscn.kirito.moe/run.sh
 . ./run.sh
 if [[ $area == cn ]];then
