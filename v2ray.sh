@@ -47,9 +47,9 @@ echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 
 
 #Update NTP settings
-rm -rf /etc/localtime
-ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-ntpdate us.pool.ntp.org
+#rm -rf /etc/localtime
+#ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#ntpdate us.pool.ntp.org
 
 #Disable SELinux
 if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
