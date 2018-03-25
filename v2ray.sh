@@ -59,7 +59,28 @@ fi
 
 #Run Install
 cd /root
+#mkdir /tmp/v2ray; mkdir /usr/bin/v2ray;/etc/v2ray/;mkdir --parents /var/log/v2ray/
+#wget --no-check-certificate https://github.com/v2ray/v2ray-core/releases/download/v3.14/v2ray-linux-64.zip
+#unzip v2ray-linux-64.zip
+# copyFile v2ray true
+# makeExecutable v2ray
+# copyFile v2ctl false
+#  makeExecutable v2ctl
+#  copyFile geoip.dat false
+#  copyFile geosite.dat false
 
+#vpoint_vmess_freedom.json(server config);vpoint_socks_vmess.json(client config)
+#chmod 640 ./config.json
+#test v2ray start
+#cd /usr/bin/v2ray
+#./v2ray -h
+# ./v2ray -config /etc/v2ray/config.json -test
+#autorun with systemd
+#cp "/tmp/v2ray/v2ray-${NEW_VER}-linux-${VDIS}/systemd/v2ray.service" "/etc/systemd/system/"
+#systemctl start v2ray.service
+#sytemctl status v2ray.service
+#systemctl enable v2ray.service
+#systemctl disable firewalld
 bash <(curl -L -s https://install.direct/go.sh)
 
 }
