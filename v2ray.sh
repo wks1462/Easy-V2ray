@@ -78,7 +78,7 @@ cd /root
 #autorun with systemd
 #cp "/tmp/v2ray/v2ray-${NEW_VER}-linux-${VDIS}/systemd/v2ray.service" "/etc/systemd/system/"
 #systemctl start v2ray.service
-#sytemctl status v2ray.service
+#systemctl status v2ray.service
 #systemctl enable v2ray.service
 #systemctl disable firewalld
 bash <(curl -L -s https://install.direct/go.sh)
