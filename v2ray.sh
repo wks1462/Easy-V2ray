@@ -60,8 +60,16 @@ fi
 #Run Install
 cd /root
 #mkdir /tmp/v2ray; mkdir /usr/bin/v2ray;/etc/v2ray/;mkdir --parents /var/log/v2ray/
+#mkdir /tmp/v2ray
+#mkdir /usr/bin/v2ray
+#mkdir /etc/v2ray/
+#mkdir --parents /var/log/v2ray/
+#cd /tmp/v2ray
 #wget --no-check-certificate https://github.com/v2ray/v2ray-core/releases/download/v3.14/v2ray-linux-64.zip
 #unzip v2ray-linux-64.zip
+#unzip v2ray-linux-64.zip
+#ls
+
 # copyFile v2ray true
 # makeExecutable v2ray
 # copyFile v2ctl false
