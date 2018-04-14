@@ -269,6 +269,7 @@ iptables -P OUTPUT ACCEPT
 iptables -F
 
 #Configure Server
+# writer server configure file by cat
 service v2ray stop
 rm -rf config
 cat << EOF > config
