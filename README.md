@@ -30,7 +30,7 @@ Github地址：
 ## 一键脚本 ##
 
 
-    wget --no-check-certificate https://raw.githubusercontent.com/wks1462/Easy-V2ray/master/v2ray.sh && bash v2ray.sh
+    wget --no-check-certificate https://raw.githubusercontent.com/wks1462/Easy-V2ray/wks1462-patch-1/v2ray.sh && bash v2ray.sh
 
 安装完成后下载VPS上 /root/config.json 客户端配置文件，与V2ray放在同一个文件夹下。（V2ray下载地址：[https://github.com/v2ray/v2ray-core/releases/latest][4]）
 然后运行V2ray，设置代理为http代理，代理服务器地址：127.0.0.1，代理端口为1080，你就进入自由的互联网啦！
