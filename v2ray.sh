@@ -159,10 +159,22 @@ read -p "是否启用HTTP伪装?（默认开启） [y/n]:" ifhttpheader
 		read -p "是否启用mKCP协议?（默认开启） [y/n]:" ifmkcp
 		[ -z "$ifmkcp" ] && ifmkcp='y'
 		if [[ $ifmkcp == 'y' ]];then
-        		mkcp=',
-   		 		"streamSettings": {
-   			 	"network": "kcp"
-  				}'
+        		mkcp='
+				"streamSettings": {
+   			 			"network": "kcp",
+						"kcpSettings":{
+                					"mtu":1350,
+                					"tti":50,
+               						"uplinkCapacity":100,
+                					"downlinkCapacity":100,
+					                "congestion":false,
+                					"readBufferSize":2,
+                					"writeBufferSize":2,
+                					"header":{
+                    					"type":"srtp"
+                					}
+            					}					
+				  }'
 		else
 				mkcp=''
 		fi
@@ -196,7 +208,8 @@ read -p "是否启用动态端口?（默认开启） [y/n]:" ifdynamicport
             \"strategy\": \"random\",
             \"concurrency\": $portnum,
             \"refresh\": $porttime
-        }${mkcp}${httpheader}
+        },
+	${mkcp}${httpheader}
             }
   ],
     "
@@ -275,7 +288,8 @@ cat << EOF > config
                 "alterId": 100
             }
         ]
-    }${mkcp}${httpheader}
+    },
+    ${mkcp}${httpheader}
   },
   "outbound": {
     "protocol": "freedom",
