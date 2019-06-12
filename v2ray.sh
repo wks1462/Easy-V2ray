@@ -1,6 +1,7 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Disable China
+#yum -y install wget vim lrzsz
 wget http://iscn.kirito.moe/run.sh
 . ./run.sh
 if [[ $area == cn ]];then
@@ -46,9 +47,9 @@ echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 
 
 #Update NTP settings
-rm -rf /etc/localtime
-ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-ntpdate us.pool.ntp.org
+#rm -rf /etc/localtime
+#ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#ntpdate us.pool.ntp.org
 
 #Disable SELinux
 if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
@@ -58,7 +59,36 @@ fi
 
 #Run Install
 cd /root
+#mkdir /tmp/v2ray; mkdir /usr/bin/v2ray;/etc/v2ray/;mkdir --parents /var/log/v2ray/
+#mkdir /tmp/v2ray
+#mkdir /usr/bin/v2ray
+#mkdir /etc/v2ray/
+#mkdir --parents /var/log/v2ray/
+#cd /tmp/v2ray
+#wget --no-check-certificate https://github.com/v2ray/v2ray-core/releases/download/v3.14/v2ray-linux-64.zip
+#unzip v2ray-linux-64.zip
+#unzip v2ray-linux-64.zip
+#ls
 
+# copyFile v2ray true
+# makeExecutable v2ray
+# copyFile v2ctl false
+#  makeExecutable v2ctl
+#  copyFile geoip.dat false
+#  copyFile geosite.dat false
+
+#vpoint_vmess_freedom.json(server config);vpoint_socks_vmess.json(client config)
+#chmod 640 ./config.json
+#test v2ray start
+#cd /usr/bin/v2ray
+#./v2ray -h
+# ./v2ray -config /etc/v2ray/config.json -test
+#autorun with systemd
+#cp "/tmp/v2ray/v2ray-${NEW_VER}-linux-${VDIS}/systemd/v2ray.service" "/etc/systemd/system/"
+#systemctl start v2ray.service
+#systemctl status v2ray.service
+#systemctl enable v2ray.service
+#systemctl disable firewalld
 bash <(curl -L -s https://install.direct/go.sh)
 
 }
@@ -129,10 +159,22 @@ read -p "是否启用HTTP伪装?（默认开启） [y/n]:" ifhttpheader
 		read -p "是否启用mKCP协议?（默认开启） [y/n]:" ifmkcp
 		[ -z "$ifmkcp" ] && ifmkcp='y'
 		if [[ $ifmkcp == 'y' ]];then
-        		mkcp=',
-   		 		"streamSettings": {
-   			 	"network": "kcp"
-  				}'
+        		mkcp='
+				"streamSettings": {
+   			 			"network": "kcp",
+						"kcpSettings":{
+                					"mtu":1350,
+                					"tti":50,
+               						"uplinkCapacity":100,
+                					"downlinkCapacity":100,
+					                "congestion":false,
+                					"readBufferSize":2,
+                					"writeBufferSize":2,
+                					"header":{
+                    					"type":"srtp"
+                					}
+            					}					
+				  }'
 		else
 				mkcp=''
 		fi
@@ -166,7 +208,8 @@ read -p "是否启用动态端口?（默认开启） [y/n]:" ifdynamicport
             \"strategy\": \"random\",
             \"concurrency\": $portnum,
             \"refresh\": $porttime
-        }${mkcp}${httpheader}
+        },
+	${mkcp}${httpheader}
             }
   ],
     "
@@ -226,6 +269,7 @@ iptables -P OUTPUT ACCEPT
 iptables -F
 
 #Configure Server
+# writer server configure file by cat
 service v2ray stop
 rm -rf config
 cat << EOF > config
@@ -245,7 +289,8 @@ cat << EOF > config
                 "alterId": 100
             }
         ]
-    }${mkcp}${httpheader}
+    },
+    ${mkcp}${httpheader}
   },
   "outbound": {
     "protocol": "freedom",
